@@ -1,9 +1,8 @@
 <script setup>
-import formLogin from './components/formLogin.vue'
 </script>
 
 <template>
-    <formLogin name="CRM Esimed"/>  
+    <router-view/>
 </template>
 
 <style scoped>
