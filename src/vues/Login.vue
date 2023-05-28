@@ -1,11 +1,11 @@
 <script setup>
-defineProps({
-  name: {
-    type: String,
-    required: false
-  }
-});
 import Componentheader from '../components/header.vue'
+import { defineComponent } from 'vue';
+
+defineComponent({
+    Componentheader,
+})
+
 </script>
 
 <template>
