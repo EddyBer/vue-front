@@ -1,72 +1,160 @@
 <template>
     <Componentheader />
-    <div class="container">
-        <form @submit="onSubmit" >
-            <div class="row">
-                <div class="col">
-                    <label for="name" class="form-label">Name</label>
-                    <input v-model="name" class="form-control" name="name" id="name">
-                    <span class="text-danger"> {{ errors.name }}</span>
-                </div>
-                <div class="col">
-                    <label for="firstname" class="form-label">Firstname</label>
-                    <input  v-model="firstname" class="form-control" name="firstname"  id="firstname">
-                    <span class="text-danger"> {{ errors.firstname }}</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="birthdate" class="form-label">Birthdate</label>
-                <input  v-model="birthdate" type="date" class="form-control" name="birthdate" id="birthdate">
-                <span class="text-danger"> {{ errors.birthdate }}</span>
-            </div>
-            <div class="form-group">
-                <label for="address" class="form-label">Address</label>
-                <input  v-model="address" class="form-control" name="address" id="address">
-                <span class="text-danger"> {{ errors.address }}</span>
-            </div>
-            <div class="form-group">
-                <label for="email" class="form-label">Mail</label>
-                <input v-model="email" class="form-control" name="email" id="email">
-                <span class="text-danger"> {{ errors.email }}</span>
-            </div>
-            <div class="form-group">
-                <label for="phone" class="form-label">Phone number</label>
-                <input v-model="phone" class="form-control" name="phone" id="phone">
-                <span class="text-danger"> {{ errors.phone }}</span>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label for="at" class="form-label">AT</label>
-                    <input v-model="at" class="form-control" name="at" id="at">
-                </div>
-                <div class="col">
-                    <label for="chargeRate" class="form-label">Charge rate</label>
-                    <input v-model="chargeRate" class="form-control" name="chargeRate" id="chargeRate">
-                </div>
-            </div>
-            <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input v-model="password" type="password" class="form-control" name="password" id="password">
-                    <span class="text-danger"> {{ errors.password }}</span>
-            </div>
-            <div class="mb-3">
-                <label for="confirmpassword" class="form-label">Confirm password</label>
-                <input v-model="confirmpassword" type="password" class="form-control" name="confirmpassword" id="confirmpassword">
-                <span class="text-danger"> {{ errors.confirmpassword }}</span>
-            </div>
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-success">Create account</button>
-            </div>
-            <router-link to="/">Log In</router-link>
-        </form>
+    <div class="d-flex align-center flex-column">
+    <v-card 
+    title="Sign up"
+    width="600"
+    >
+    <v-container>
+        <v-form @submit.prevent="onSubmit">
+            <v-row>
+                <v-col
+                    cols="6"
+                    md="4"
+                >
+                <v-text-field
+                    v-model="name"
+                    label="Name"
+                    variant="underlined"
+                    required
+                    autocomplete="family-name"
+                    :error-messages="errors.name"
+                ></v-text-field>
+                </v-col>
+                <v-col
+                    cols="6"
+                    md="4"
+                >
+                <v-text-field
+                    v-model="firstname"
+                    label="Firstname"
+                    variant="underlined"
+                    required
+                    autocomplete="given-name"
+                    :error-messages="errors.firstname"
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-col
+                    cols="12"
+                    md="8"
+                >
+            <v-text-field
+                type="date"
+                v-model="birthdate"
+                label="Birthdate"
+                variant="underlined"
+                autocomplete="bday"
+                required
+            ></v-text-field>
+            </v-col>
+            <v-col
+                    cols="12"
+                    md="8"
+                >
+                <v-text-field
+                    v-model="address"
+                    label="Address"
+                    variant="underlined"
+                    required
+                    :error-messages="errors.address"
+                ></v-text-field>
+            </v-col>
+            <v-col
+                    cols="12"
+                    md="8"
+                >
+                <v-text-field
+                    v-model="email"
+                    label="Email"
+                    variant="underlined"
+                    required
+                    :error-messages="errors.email"
+                ></v-text-field>
+            </v-col>
+            <v-col
+                    cols="12"
+                    md="8"
+                >
+                <v-text-field
+                    v-model="phone"
+                    label="Phone number"
+                    variant="underlined"
+                    required
+                    :error-messages="errors.phone"
+                ></v-text-field>
+            </v-col>
+            <v-row>
+                <v-col
+                    cols="6"
+                    md="4"
+                >
+                <v-text-field
+                    v-model="at"
+                    label="AT"
+                    variant="underlined"
+                    required
+                    :error-messages="errors.at"
+                ></v-text-field>
+                </v-col>
+                <v-col
+                    cols="6"
+                    md="4"
+                >
+                <v-text-field 
+                    v-model="chargeRate"
+                    label="Charge Rate"
+                    variant="underlined"
+                    required
+                    :error-messages="errors.chargeRate"
+                ></v-text-field>
+                </v-col>
+            </v-row>
+            <v-col
+                    cols="12"
+                    md="8"
+                >
+                <v-text-field
+                    type="password"
+                    v-model="password"
+                    label="Password"
+                    variant="underlined"
+                    required
+                    :error-messages="errors.password"
+                ></v-text-field>
+            </v-col>
+            <v-col
+                    cols="12"
+                    md="8"
+                >
+                <v-text-field
+                    type="password"
+                    v-model="confirmpassword"
+                    label="Confirm password"
+                    variant="underlined"
+                    required
+                    :error-messages="errors.confirmpassword"
+                ></v-text-field>
+            </v-col>
+            <v-btn
+                rounded="xl"
+                type="submit">
+                Create account
+            </v-btn>
+            <router-link to="/">
+                <v-btn
+                variant="plain">
+                Log In
+                </v-btn>
+            </router-link>
+        </v-form>
+    </v-container>
+    </v-card>
     </div>
-
-    <ComponentToast/>
 </template>
 
 <script setup>
 import Componentheader from '../components/header.vue'
-import ComponentToast from '../components/toast.vue'
 import { usersAPI } from "../services/users.service";
 import { useForm } from 'vee-validate';
 import * as yup from 'yup'
@@ -119,15 +207,6 @@ const goBack = () => {
     router.push({ path: "/" });
 }
 
-const makeToast = (message) => { 
-        this.$bvToast.toast(`${message}`, {
-          title: 'BootstrapVue Toast',
-          autoHideDelay: 5000,
-          appendToast: true
-        })
-}
-
-
 const onSubmit = handleSubmit(async values => {
     try {
         await usersAPI.create({
@@ -147,7 +226,6 @@ const onSubmit = handleSubmit(async values => {
         goBack()
     } catch (errror) {
         const message = errror.response.data.message[0].msg
-        makeToast(message)
     }
 });
 

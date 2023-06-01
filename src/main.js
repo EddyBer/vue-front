@@ -1,16 +1,20 @@
 import './assets/main.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'bootstrap/dist/js/bootstrap.js'
+
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+const vuetify = createVuetify({
+  components,
+  directives,
+})
 
 import { createApp } from 'vue'
 import { Router } from './router/index.js'
 import App from './App.vue'
-// import { ValidationProvider, ValidationObserver } from '@/vee-validate.ts'
 
 createApp(App)
     .use(Router)
+    .use(vuetify)
     .mount('#app')
-    // .component('ValidationProvider', ValidationProvider)
-    // .component('ValidationObserver', ValidationObserver)
 

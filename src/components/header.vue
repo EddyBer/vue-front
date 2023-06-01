@@ -3,10 +3,10 @@
 </script>
 
 <template>
-    <nav class="navbar  navbar-dark bg-primary">
-        <div class="container-fluid">
-            <IconSupport/>
-            <span class="navbar-brand mb-0 h1">CRM Esimed</span>
-        </div>
-    </nav>
+    <v-app-bar :elevation="2" rounded >
+        <IconSupport/>
+        <v-app-bar-title>
+            My CRM
+        </v-app-bar-title>
+    </v-app-bar>
 </template>

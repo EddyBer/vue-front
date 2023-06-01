@@ -43,8 +43,7 @@ export class UsersAPIService {
 
     async create(dto) {
         const response = await this.$api.post(`${this.$apiPath}`, dto);
-        const userAPI  = response.data
-        return userAPI
+        return response.data
     }
 
     async update(dto) {
