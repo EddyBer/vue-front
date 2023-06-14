@@ -1,14 +1,12 @@
-import  axios from 'axios'
 import { User } from '@/models/user.model';
+import { middlewareAPI } from '../axios';
 
 export class UsersAPIService {
     $api;
     $apiPath = "USER"
 
     constructor() {
-        this.$api = axios.create({
-            baseURL: 'http://127.0.0.1:3000/',
-        });
+        this.$api = middlewareAPI
     }
 
     async getUsers() {

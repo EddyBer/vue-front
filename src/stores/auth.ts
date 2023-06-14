@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { AppAuth } from '../models/app-auth.model';
-import { parseQuery } from "vue-router";
 
 export interface AuthState {
     accessToken: string;
@@ -29,5 +28,5 @@ export const useAuthStore = defineStore('auth', {
             this.accessToken = accessToken;
         }
     },
-    persist:true,
+    persist:true
 })

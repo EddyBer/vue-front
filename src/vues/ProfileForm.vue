@@ -25,20 +25,23 @@ const formatDate = (date) => {
 onMounted(async() => {
     try {
         const user = await usersAPI.getUser(authStore.userId)
-        const data = user.data
 
-        name.value = data.name
-        firstname.value = data.firstname
-
-        let date = new Date(data.birthdate)
-        date = formatDate(date)
-        birthdate.value = date
-        address.value = data.adress
-        email.value = data.email
-        phone.value = data.phone
-        at.value = data.AT
-        chargeRate.value = data.chargesRate
-
+        if (user) {
+            const data = user.data
+            name.value = data.name
+            firstname.value = data.firstname
+            let date = new Date(data.birthdate)
+            date = formatDate(date)
+            birthdate.value = date
+            address.value = data.adress
+            email.value = data.email
+            phone.value = data.phone
+            at.value = data.AT
+            chargeRate.value = data.chargesRate
+        } else {
+            throw  "Erreur lors de la récupération de vos données"
+        }
+        
      } catch (error) {
         alert(error)
      }
@@ -64,7 +67,7 @@ const [
     email,
     phone,
     at,
-    chargeRate,,] = useFieldModel([
+    chargeRate,] = useFieldModel([
     "name",
     "firstname",
     "birthdate",
