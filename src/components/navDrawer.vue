@@ -1,7 +1,15 @@
-<script setup>
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { defineComponent } from 'vue'
+import InvoiceForm from '../vues/InvoiceForm.vue'
+import Dashboard from '../vues/Dashboard.vue'
+import clientsHeader from './clientsHeader.vue'
+import Projects from '../vues/Projects.vue'
 
 defineComponent({
+    clientsHeader,
+    InvoiceForm,
+    Dashboard,
+    Projects
 })
 
 const items = [
@@ -19,15 +27,40 @@ const items = [
         title: 'Invoices',
         value: 3,
         link:'/invoices'
+    },
+    {
+        title:'Projects',
+        value: 4,
+        link:'/projects'
+    },
+    {
+        title:'My profile',
+        value: 5,
+        link:'/profile'
     }
 ];
+
+const props = defineProps({
+    template: String
+})
 
 </script>
 
 <template>
     <v-card style="height: 100%;">
       <v-layout style="height: 100%;">
-        <v-app-bar title="My CRM"></v-app-bar>
+        <v-app-bar>
+            <v-app-bar-title>
+                My CRM
+            </v-app-bar-title>
+            <v-btn
+            variant="elevated"
+            rounded="lg"
+            color="warning"
+            to="/logout">
+                Logout
+            </v-btn>
+        </v-app-bar>
   
         <v-navigation-drawer permanent >
             <v-list>
@@ -42,7 +75,25 @@ const items = [
             </v-list>
         </v-navigation-drawer>
 
-        <v-main style="min-height: 300px;">
+        <!-- <v-main style="min-height: 300px;"> -->
+        <v-main class="d-flex w-100">
+            <div class="d-flex w-100" v-if="template == 'clients'">
+                <clientsHeader/>
+            </div>
+
+            <div  v-else-if="template === 'invoices'"> 
+                <InvoiceForm/>
+            </div>
+
+            <div  v-else-if="template === 'dashboard'"> 
+                <Dashboard/>
+            </div>
+            <div  v-else-if="template === 'projects'">
+
+            </div>
+            <div  v-else-if="template === 'profile'">
+                
+            </div>
         </v-main>
       </v-layout>
     </v-card>

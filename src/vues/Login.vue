@@ -5,8 +5,10 @@ import { useForm } from 'vee-validate';
 import { authAPI } from "../services/auth.service";
 import * as yup from 'yup'
 import { useRouter } from 'vue-router';
+import { useAuthStore } from "@/stores/auth";
 
 const router = useRouter();
+const authStore = useAuthStore();
 
 const { handleSubmit, errors, useFieldModel } = useForm({
   validationSchema:yup.object({
@@ -32,14 +34,23 @@ const goToMainPage = () => {
 
 const onSubmit = handleSubmit(async values => {
     try {
-        await authAPI.login({
+        const login = await authAPI.login({
             email: values.email,
             password: values.password,
         })
 
+        if (!login.data.accessToken || !login.data.refreshToken || !login.data.userId) {
+          throw new Error(this.$t("login.invalid_login_response").toString());
+        }
+
+        authStore.login({
+          accessToken: login.accessToken,
+          refreshToken: login.refreshToken,
+          userId: login.userId,
+        });
+
         goToMainPage()
     } catch (error) {
-        //const message = errror.response.data.message[0].msg
         alert(error)
     }
 });
@@ -48,7 +59,7 @@ const onSubmit = handleSubmit(async values => {
 
 <template>
     <Componentheader/>
-    <v-card class="mx-auto px-6 py-8 mt-16" max-width="344" >
+    <v-card class="mx-auto my-auto px-6 py-8 rounded-lg elevation-24" max-width="344" >
     <v-container>
         <v-form @submit.prevent="onSubmit">
             <v-text-field

@@ -8,5 +8,5 @@ defineComponent({
 </script>
 
 <template>
-    <navDrawer/>
+    <navDrawer template="dashboard"/>
   </template>

@@ -3,7 +3,10 @@
 </script>
 
 <template>
-    <v-app-bar :elevation="2" rounded >
+    <v-app-bar
+    class="px-5"
+    :elevation="2" 
+    rounded >
         <IconSupport/>
         <v-app-bar-title>
             My CRM

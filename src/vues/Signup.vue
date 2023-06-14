@@ -3,15 +3,12 @@
     <div class="d-flex align-center flex-column">
     <v-card 
     title="Sign up"
-    width="600"
-    >
+    width="50%"
+    class=" rounded-lg my-16 mx-auto">
     <v-container>
         <v-form @submit.prevent="onSubmit">
             <v-row>
-                <v-col
-                    cols="6"
-                    md="4"
-                >
+                <v-col>
                 <v-text-field
                     v-model="name"
                     label="Name"
@@ -21,10 +18,7 @@
                     :error-messages="errors.name"
                 ></v-text-field>
                 </v-col>
-                <v-col
-                    cols="6"
-                    md="4"
-                >
+                <v-col>
                 <v-text-field
                     v-model="firstname"
                     label="Firstname"
@@ -35,10 +29,7 @@
                 ></v-text-field>
                 </v-col>
             </v-row>
-            <v-col
-                    cols="12"
-                    md="8"
-                >
+            <v-col>
             <v-text-field
                 type="date"
                 v-model="birthdate"
@@ -48,10 +39,7 @@
                 required
             ></v-text-field>
             </v-col>
-            <v-col
-                    cols="12"
-                    md="8"
-                >
+            <v-col>
                 <v-text-field
                     v-model="address"
                     label="Address"
@@ -60,10 +48,7 @@
                     :error-messages="errors.address"
                 ></v-text-field>
             </v-col>
-            <v-col
-                    cols="12"
-                    md="8"
-                >
+            <v-col>
                 <v-text-field
                     v-model="email"
                     label="Email"
@@ -72,10 +57,7 @@
                     :error-messages="errors.email"
                 ></v-text-field>
             </v-col>
-            <v-col
-                    cols="12"
-                    md="8"
-                >
+            <v-col>
                 <v-text-field
                     v-model="phone"
                     label="Phone number"
@@ -85,10 +67,7 @@
                 ></v-text-field>
             </v-col>
             <v-row>
-                <v-col
-                    cols="6"
-                    md="4"
-                >
+                <v-col>
                 <v-text-field
                     v-model="at"
                     label="AT"
@@ -97,10 +76,7 @@
                     :error-messages="errors.at"
                 ></v-text-field>
                 </v-col>
-                <v-col
-                    cols="6"
-                    md="4"
-                >
+                <v-col>
                 <v-text-field 
                     v-model="chargeRate"
                     label="Charge Rate"
@@ -110,10 +86,7 @@
                 ></v-text-field>
                 </v-col>
             </v-row>
-            <v-col
-                    cols="12"
-                    md="8"
-                >
+            <v-col>
                 <v-text-field
                     type="password"
                     v-model="password"
@@ -123,10 +96,7 @@
                     :error-messages="errors.password"
                 ></v-text-field>
             </v-col>
-            <v-col
-                    cols="12"
-                    md="8"
-                >
+            <v-col>
                 <v-text-field
                     type="password"
                     v-model="confirmpassword"
@@ -138,7 +108,8 @@
             </v-col>
             <v-btn
                 rounded="xl"
-                type="submit">
+                type="submit"
+                color="success">
                 Create account
             </v-btn>
             <router-link to="/">
