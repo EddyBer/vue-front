@@ -4,12 +4,14 @@ import InvoiceForm from '../vues/InvoiceForm.vue'
 import Dashboard from '../vues/Dashboard.vue'
 import clientsHeader from './clientsHeader.vue'
 import Projects from '../vues/Projects.vue'
+import ProfileForm from '../vues/ProfileForm.vue'
 
 defineComponent({
     clientsHeader,
     InvoiceForm,
     Dashboard,
-    Projects
+    Projects,
+    ProfileForm,
 })
 
 const items = [
@@ -77,7 +79,7 @@ const props = defineProps({
 
         <!-- <v-main style="min-height: 300px;"> -->
         <v-main class="d-flex w-100">
-            <div class="d-flex w-100" v-if="template == 'clients'">
+            <div class="w-100" v-if="template == 'clients'">
                 <clientsHeader/>
             </div>
 
@@ -91,8 +93,8 @@ const props = defineProps({
             <div  v-else-if="template === 'projects'">
 
             </div>
-            <div  v-else-if="template === 'profile'">
-                
+            <div class="w-100" v-else-if="template === 'profile'">
+                <ProfileForm/>
             </div>
         </v-main>
       </v-layout>

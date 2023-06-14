@@ -23,10 +23,9 @@ export class UsersAPIService {
         return users;
     }
 
-    async getUser(dto) {
-        const response = await this.$api.get(`${this.$apiPath}/${dto.id}`);
-        const userAPI  = response.data
-        return User.fromAPIResponse(userAPI);
+    async getUser(id) {
+        const response = await this.$api.get(`${this.$apiPath}/${id}`);
+        return response;
     }
 
     async resetToken(dto) {

@@ -44,9 +44,9 @@ const onSubmit = handleSubmit(async values => {
         }
 
         authStore.login({
-          accessToken: login.accessToken,
-          refreshToken: login.refreshToken,
-          userId: login.userId,
+          accessToken: login.data.accessToken,
+          refreshToken: login.data.refreshToken,
+          userId: login.data.userId,
         });
 
         goToMainPage()

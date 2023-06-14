@@ -8,7 +8,6 @@ defineComponent({
     ClientForm
 })
 
-
 </script>
 
 <template>
@@ -26,7 +25,7 @@ defineComponent({
         <v-card-text class="d-flex w-100">
           <v-window v-model="tab">
             <v-window-item :value="list">
-                
+
             </v-window-item>
     
             <v-window-item :value="create">
@@ -39,4 +38,4 @@ defineComponent({
           </v-window>
         </v-card-text>
       </v-card>
-    </template>
+</template>
