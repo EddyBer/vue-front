@@ -10,8 +10,6 @@ const middlewareAPI = axios.create({
 middlewareAPI.interceptors.request.use(function (config: InternalAxiosRequestConfig) {
     const authStore = useAuthStore();
     // Si on a un accessToken
-    console.log(authStore.accessToken)
-    console.log(authStore.refreshToken)
     if (authStore.accessToken && config.headers) {
         config.headers.Authorization = `Bearer ${authStore.accessToken}`
     }
