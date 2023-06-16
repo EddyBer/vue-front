@@ -26,7 +26,6 @@ onMounted(async() => {
         const clients = await clientsApi.getMyClients(authStore.userId)
         if (clients) {
             clientList.value.push(...clients)
-            console.log(clientList)
         } else {
             throw  "Erreur lors de la récupération de vos clients"
         }

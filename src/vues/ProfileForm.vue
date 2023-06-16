@@ -94,7 +94,7 @@ const onSubmit = handleSubmit(async values => {
 
         alert('Informations updated')
     } catch(error) {
-        console.log(error)
+        alert(error)
     }
 })
 
