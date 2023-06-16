@@ -7,5 +7,9 @@
     </v-app>
 </template>
 
-<style scoped>
+<style>
+html,body,#app {
+    height: 100%;
+    overflow: hidden;
+}
 </style>

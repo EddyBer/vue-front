@@ -1,4 +1,3 @@
-import { User } from '@/models/user.model';
 import { middlewareAPI } from '../axios';
 
 export class UsersAPIService {
@@ -7,18 +6,6 @@ export class UsersAPIService {
 
     constructor() {
         this.$api = middlewareAPI
-    }
-
-    async getUsers() {
-        const response      = await this.$api.get(this.$apiPath);
-        const usersAPI      = response.data
-        const users = [];
-
-        for(const userAPI of usersAPI) {
-            users.push(User.fromAPIResponse(userAPI));
-        }
-
-        return users;
     }
 
     async getUser(id) {
@@ -34,8 +21,8 @@ export class UsersAPIService {
 
     async delete(dto ) {
         const response = await this.$api.delete(`${this.$apiPath}/${dto.id}`);
-        const successResponse = response.data
-        return successResponse.success;
+        return response.data
+      
     }
 
     async create(dto) {
@@ -45,8 +32,7 @@ export class UsersAPIService {
 
     async update(dto) {
         const response = await this.$api.put(`${this.$apiPath}/${dto.id}`, dto);
-        const userAPI  = response.data
-        return User.fromAPIResponse(userAPI);
+        return response.data
     }
 }
 

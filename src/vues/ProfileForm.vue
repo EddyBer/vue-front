@@ -7,7 +7,6 @@ import { usersAPI } from '../services/users.service';
 
 const authStore = useAuthStore();
 
-
 const formatDate = (date) => {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -41,11 +40,9 @@ onMounted(async() => {
         } else {
             throw  "Erreur lors de la récupération de vos données"
         }
-        
      } catch (error) {
         alert(error)
      }
-    
 })
 
 const { handleSubmit, errors, useFieldModel } = useForm({
@@ -80,11 +77,31 @@ const [
     "confirmpassword",
 ])
 
+const onSubmit = handleSubmit(async values => {
+    const userId = authStore.userId
+    try {
+        await usersAPI.update({
+            id:userId,
+            name: values.name,
+            firstname: values.firstname,
+            birthdate: values.birthdate,
+            adress: values.address,
+            email: values.email,
+            phone: values.phone,
+            AT: values.at,
+            chargesRate: values.chargeRate,
+        })
+
+        alert('Informations updated')
+    } catch(error) {
+        console.log(error)
+    }
+})
+
 </script>
 
 <template>
-    <v-container width="100%">
-        <v-form @submit.prevent="onSubmit">
+    <v-container width="100%"> <v-form @submit.prevent="onSubmit">
             <v-row>
                 <v-col>
                 <v-text-field
@@ -171,5 +188,6 @@ const [
                 Update profile
             </v-btn>
         </v-form>
+       
     </v-container>
 </template>

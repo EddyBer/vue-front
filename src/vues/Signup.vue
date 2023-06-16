@@ -195,8 +195,8 @@ const onSubmit = handleSubmit(async values => {
         alert('user Created')
 
         goBack()
-    } catch (errror) {
-        const message = errror.response.data.message[0].msg
+    } catch (error) {
+        const message = error.response.data.message[0].msg
     }
 });
 

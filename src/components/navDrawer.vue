@@ -79,7 +79,7 @@ const props = defineProps({
 
         <!-- <v-main style="min-height: 300px;"> -->
         <v-main class="d-flex w-100">
-            <div class="w-100" v-if="template == 'clients'">
+            <div class="w-100 h-100" v-if="template == 'clients'">
                 <clientsHeader/>
             </div>
 
