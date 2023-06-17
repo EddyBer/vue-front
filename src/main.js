@@ -22,7 +22,7 @@ const vuetify = createVuetify({
 
 import { createApp } from 'vue'
 import { Router } from './router/index.js'
-import { createPinia } from 'pinia'
+import { createPinia, PiniaVuePlugin } from 'pinia'
 import App from './App.vue'
 
 const pinia = createPinia()
@@ -30,6 +30,7 @@ pinia.use(piniaPluginPersistedstate)
 
 createApp(App)
     .use(Router)
+    .use(PiniaVuePlugin)
     .use(pinia)
     .use(vuetify)
     .mount('#app')

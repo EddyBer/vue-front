@@ -4,8 +4,10 @@ import { useForm } from 'vee-validate';
 import * as yup from 'yup'
 import { clientsApi } from '../services/clients.service';
 import { useAuthStore } from "../stores/auth";
+import { uselistStore } from "../stores/liste";
 
 const authStore = useAuthStore();
+const listStore = uselistStore();
 
 const { handleSubmit, errors, useFieldModel } = useForm({
     validationSchema: yup.object({
@@ -74,9 +76,9 @@ const onSubmit = handleSubmit(async values => {
             userId: id
         })
 
-        alert('client Created')
+        listStore.updateData('clients')
 
-        goBack()
+        alert('client Created')
     } catch (error) {
         const message = error.response.data.message[0].msg
     }

@@ -1,13 +1,12 @@
 <script setup>
 import { ref, defineComponent } from 'vue';
-import ClientForm from '../vues/ClientForm.vue';
-import ClientsListVue from '../vues/ClientsList.vue';
-
+import ProjectsList from '../vues/ProjectsList.vue'
+import ProjectForm from '../vues/ProjectForm.vue'
 const tab = ref('')
 
 defineComponent({
-    ClientForm,
-    ClientsListVue
+  ProjectsList,
+  ProjectForm
 })
 
 </script>
@@ -26,10 +25,10 @@ defineComponent({
       <v-card-text class="d-flex w-100 pa-0 flex-grow-1">
         <v-window class="w-100 h-100 overflow-auto" v-model="tab">
           <v-window-item value="list" class="flex-grow-1">
-            <ClientsListVue/>
+            <ProjectsList/>
           </v-window-item>
           <v-window-item value="create" class="flex-grow-1">
-              <ClientForm/>
+            <ProjectForm/>
           </v-window-item>
         </v-window>
       </v-card-text>
