@@ -4,7 +4,8 @@ import { clientsApi} from '../services/clients.service'
 import { useAuthStore } from "../stores/auth";
 import { uselistStore } from "../stores/liste";
 import { onMounted, onBeforeMount, onActivated , onUpdated } from 'vue';
-import { VDataTable } from 'vuetify/labs/VDataTable'
+import { VDataTable } from 'vuetify/labs/VDataTable';
+import { storeToRefs } from 'pinia'
 
 const authStore = useAuthStore();
 const listStore = uselistStore();
@@ -41,15 +42,24 @@ const deleteItem = (item) => {
 }
 
 const deleteItemConfirm = async () => {
-    const res = await clientsApi.delete(clientToDelete.value)
-    if (res > 0) {
+    try {
+        const res = await clientsApi.delete(clientToDelete.value)
+
         closeDelete()
-    } else {
-        alert('Erreur lors de la supression')
+        listStore.updateData('clients')
+        alert('client deleted')
+    } catch (error) {
+        const DisplayMessage = []
+        const messages = error.response.data.message
+        messages.forEach(message => {
+            DisplayMessage.push(`${message.param} : ${message.msg}`)
+        });
+        closeDelete()
+        alert(DisplayMessage)
     }
 }
 
-const clientList = ref(listStore.clientData)
+const { clientData } = storeToRefs(listStore)
 </script>
 
 <template>
@@ -63,7 +73,7 @@ const clientList = ref(listStore.clientData)
     <v-data-table
         v-model:items-per-page="itemsPerPage"
         :headers="headers"
-        :items="clientList"
+        :items="clientData"
         item-value="name"
         class="elevation-1 h-100"
         :search="search"

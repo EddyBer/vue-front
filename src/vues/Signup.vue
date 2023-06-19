@@ -1,10 +1,10 @@
 <template>
     <Componentheader />
-    <div class="d-flex align-center flex-column">
+    <div class="d-flex align-center flex-column overflow-auto">
     <v-card 
     title="Sign up"
     width="50%"
-    class=" rounded-lg my-16 mx-auto">
+    class=" rounded-lg my-16 mx-auto overflow-auto">
     <v-container>
         <v-form @submit.prevent="onSubmit">
             <v-row>
@@ -196,7 +196,12 @@ const onSubmit = handleSubmit(async values => {
 
         goBack()
     } catch (error) {
-        const message = error.response.data.message[0].msg
+        const DisplayMessage = []
+        const messages = error.response.data.message
+        messages.forEach(message => {
+            DisplayMessage.push(`${message.param} : ${message.msg}`)
+        });
+        alert(DisplayMessage)
     }
 });
 

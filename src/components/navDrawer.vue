@@ -6,6 +6,7 @@ import clientsHeader from './clientsHeader.vue'
 import Projects from '../vues/Projects.vue'
 import ProfileForm from '../vues/ProfileForm.vue'
 import ProjectsHeader from './ProjectsHeader.vue'
+import invoicesHeader from './invoicesHeader.vue'
 
 defineComponent({
     clientsHeader,
@@ -13,7 +14,8 @@ defineComponent({
     Dashboard,
     Projects,
     ProfileForm,
-    ProjectsHeader
+    ProjectsHeader,
+    invoicesHeader,
 })
 
 const items = [
@@ -85,8 +87,8 @@ const props = defineProps({
                 <clientsHeader/>
             </div>
 
-            <div  v-else-if="template === 'invoices'"> 
-                <InvoiceForm/>
+            <div class="w-100 h-100" v-else-if="template === 'invoices'"> 
+                <invoicesHeader/>
             </div>
 
             <div  v-else-if="template === 'dashboard'"> 

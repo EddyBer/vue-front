@@ -5,9 +5,12 @@ import * as yup from 'yup'
 import { clientsApi } from '../services/clients.service';
 import { useAuthStore } from "../stores/auth";
 import { uselistStore } from "../stores/liste";
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const authStore = useAuthStore();
 const listStore = uselistStore();
+const router = useRouter();
 
 const { handleSubmit, errors, useFieldModel } = useForm({
     validationSchema: yup.object({
@@ -66,7 +69,7 @@ const onSubmit = handleSubmit(async values => {
 
         await clientsApi.create({
             name: values.name,
-            contactname: values.Contactname,
+            Contactname: values.Contactname,
             firstname: values.firstname,
             adress: values.address,
             phone: values.phone,
@@ -75,10 +78,9 @@ const onSubmit = handleSubmit(async values => {
             SIRET: values.SIRET,
             userId: id
         })
-
         listStore.updateData('clients')
-
-        alert('client Created')
+        console.log('Client created')
+        location.reload()
     } catch (error) {
         const message = error.response.data.message[0].msg
     }
@@ -89,7 +91,7 @@ const onSubmit = handleSubmit(async values => {
 
 <template>
     <v-container width="100%">
-        <v-form @submit.prevent="onSubmit">
+        <v-form @submit.prevent="onSubmit" ref="clientForm">
             <v-row>
                 <v-select label="Select" v-model="type"
                 :items="select"

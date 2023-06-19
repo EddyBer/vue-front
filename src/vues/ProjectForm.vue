@@ -12,22 +12,9 @@ const authStore = useAuthStore();
 const listStore = uselistStore();
 
 const { handleSubmit, errors, useFieldModel } = useForm({
-    // validationSchema: yup.object({
-    //     type: yup.string().required(),
-    //     name: yup.string().required(),
-    //     firstname: yup.string().when("type", {
-    //         is: '1',
-    //         then: (schema) => schema.required(),
-    //     }),
-    //     Contactname: yup.string().when("type", {
-    //         is: '2',
-    //         then: (schema) => schema.required(),
-    //     }),
-    //     address: yup.string().required(),
-    //     email: yup.string().required(),
-    //     phone:yup.string().required().matches(/^\d{3,15}$/, "Invalid phone number"),
-    //     SIRET: yup.string().required().matches(/^\d{14}$/, "Invalid SIRET")
-    // })
+    validationSchema: yup.object({
+        name: yup.string().required(),
+    })
 });
 
 const statusList = ["prospect",

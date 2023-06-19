@@ -2,10 +2,13 @@ import { defineStore } from "pinia";
 import { clientsApi} from '../services/clients.service'
 import { projectsApi} from '../services/projects.service'
 import { useAuthStore } from "../stores/auth";
+import { Projects } from "../models/projects.model";
+import { Clients } from "../models/clients.model";
 
 export interface ListState {
     listName: string;
-    data: Object[];
+    clientData: Clients[];
+    projectData: Projects[];
 }
 
 export const uselistStore = defineStore('list', {
@@ -47,8 +50,7 @@ export const uselistStore = defineStore('list', {
         },
         async updateData(list :string) {
            await this.loadData(list)
-           console.log(this.data)
         }
-    },  
+    },
     persist:true,
 })
