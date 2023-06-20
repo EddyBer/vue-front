@@ -45,9 +45,9 @@ const deleteItemConfirm = async () => {
     try {
         const res = await clientsApi.delete(clientToDelete.value)
 
-        closeDelete()
-        listStore.updateData('clients')
-        alert('client deleted')
+            closeDelete()
+            listStore.updateData('clients')
+            alert('client deleted')
     } catch (error) {
         const DisplayMessage = []
         const messages = error.response.data.message

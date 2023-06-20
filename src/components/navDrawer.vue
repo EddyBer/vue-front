@@ -97,7 +97,7 @@ const props = defineProps({
             <div class="w-100 h-100"  v-else-if="template === 'projects'">
                 <ProjectsHeader/>
             </div>
-            <div class="w-100" v-else-if="template === 'profile'">
+            <div class="w-100 h-100 overflow-auto" v-else-if="template === 'profile'">
                 <ProfileForm/>
             </div>
         </v-main>
