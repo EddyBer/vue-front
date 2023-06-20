@@ -59,7 +59,7 @@ Router.beforeEach((to, from, next) => {
       path: '/',
       params: { nextUrl: to.fullPath }
     })
-  } else if(to.matched.some(record => record.meta.is_connected)) {
+  } else if (to.fullPath != '/') {
     if(!authStore.accessToken) {
       next({
         path: '/',
@@ -69,7 +69,7 @@ Router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    next();
+    next()
   }
 })
 
