@@ -1,21 +1,25 @@
 import { defineStore } from "pinia";
 import { clientsApi} from '../services/clients.service'
 import { projectsApi} from '../services/projects.service'
+import { InvoicesApi } from '../services/invoices.service'
 import { useAuthStore } from "../stores/auth";
 import { Projects } from "../models/projects.model";
 import { Clients } from "../models/clients.model";
+import { Invoices } from "../models/invoices.model";
 
 export interface ListState {
     listName: string;
     clientData: Clients[];
     projectData: Projects[];
+    invoicesData : Invoices[]
 }
 
 export const uselistStore = defineStore('list', {
     state: ():ListState => ({
         listName: '',
         clientData: [],
-        projectData:[]
+        projectData:[],
+        invoicesData: []
     }),
     actions: {
         async loadData(list :string) {
@@ -46,6 +50,18 @@ export const uselistStore = defineStore('list', {
                         alert(error)
                     }
                     break
+                case 'invoices' :
+                try {
+                    const invoices = await InvoicesApi.getMyInvoices(parseInt(authStore.userId))
+                    if (invoices) {
+                        this.invoicesData = invoices
+                    } else {
+                        throw  "Erreur lors de la récupération de vos factures"
+                    }
+                } catch (error) {
+                    alert(error)
+                }
+                break
             }
         },
         async updateData(list :string) {

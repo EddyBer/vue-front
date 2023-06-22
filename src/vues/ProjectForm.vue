@@ -14,10 +14,13 @@ const listStore = uselistStore();
 const { handleSubmit, errors, useFieldModel } = useForm({
     validationSchema: yup.object({
         name: yup.string().required(),
+        status:yup.string().required(),
+        clientId:yup.number().required()
     })
 });
 
-const statusList = ["prospect",
+const statusList = [
+    "prospect",
     "quotation sent",
     "quotation accepted",
     "Start",
@@ -52,7 +55,7 @@ onMounted(async()=> {
 const onSubmit = handleSubmit(async values => {
     try {
         const id = authStore.userId
-        console.log(values)
+
         await projectsApi.create({
             name: values.name,
             status: values.status,
@@ -61,10 +64,8 @@ const onSubmit = handleSubmit(async values => {
         })
 
         listStore.updateData('projects')
-
         alert('project Created')
     } catch (error) {
-        console.log(error)
         const message = error.response.data.message[0].msg
     }
 })
@@ -82,11 +83,13 @@ const onSubmit = handleSubmit(async values => {
             <v-col>
                 <v-select label="Status" v-model="status"
                 :items="statusList"
+                :error-messages="errors.status"
                 ></v-select>
             </v-col>
             <v-col>
                 <v-select label="Client" v-model="clientId"
                 :items="clientList"
+                :error-messages="errors.clientId"
                 ></v-select>
             </v-col>
             <v-btn rounded="xl" type="submit" color="success">

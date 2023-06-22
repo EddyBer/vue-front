@@ -74,7 +74,6 @@ const { projectData } = storeToRefs(listStore)
         class="elevation-1 h-100"
         :search="search"
     >
-
     <template v-slot:item.actions="{ item }">
         <v-icon
         size="small"

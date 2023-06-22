@@ -59,7 +59,7 @@ Router.beforeEach((to, from, next) => {
       path: '/',
       params: { nextUrl: to.fullPath }
     })
-  } else if (to.fullPath != '/') {
+  } else if (to.fullPath != '/' && to.fullPath != '/signup') {
     if(!authStore.accessToken) {
       next({
         path: '/',

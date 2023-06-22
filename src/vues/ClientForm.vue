@@ -79,7 +79,6 @@ const onSubmit = handleSubmit(async values => {
             userId: id
         })
         listStore.updateData('clients')
-        console.log('Client created')
         location.reload()
     } catch (error) {
         const message = error.response.data.message[0].msg

@@ -22,11 +22,11 @@ defineComponent({
         <v-tab value="create">Create</v-tab>
       </v-tabs>
   
-      <v-card-text class="d-flex w-100 pa-0 flex-grow-1">
+      <v-card-text class="d-flex w-100 pa-0 flex-grow-1 overflow-auto">
         <v-window class="w-100 h-100 overflow-auto" v-model="tab">
           <v-window-item value="list" class="flex-grow-1">
             <ProjectsList/>
-          </v-window-item>
+          </v-window-item >
           <v-window-item value="create" class="flex-grow-1">
             <ProjectForm/>
           </v-window-item>

@@ -21,6 +21,10 @@ export class InvoicesAPIService {
         return inovices
     }
 
+    async getLastInvoice(): Promise<Invoices> {
+        return await this.$api.get(`${this.$apiPath}/last`)
+    }
+
     async create(dto) {
         const response = await this.$api.post(`${this.$apiPath}`, dto)
         return response.data
