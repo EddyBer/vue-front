@@ -65,6 +65,7 @@ const onSubmit = handleSubmit(async values => {
 
         listStore.updateData('projects')
         alert('project Created')
+        location.reload()
     } catch (error) {
         const message = error.response.data.message[0].msg
     }

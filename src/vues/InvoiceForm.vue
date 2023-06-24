@@ -151,7 +151,7 @@ const onSubmit = handleSubmit(async values => {
                     <v-textarea label="Label" variant="outlined" v-model="note"></v-textarea>
                 </v-col>
             <v-btn rounded="xl" type="submit" color="success">
-                Create client
+                Create invoice
             </v-btn>
         </v-form>
     </v-container>

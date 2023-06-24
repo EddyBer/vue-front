@@ -48,7 +48,7 @@ const editItem = (item) => {
         editedIndex.value = item.id
         name.value = item.name
         firstname.value = item.firstname
-        contactname.value = item.contactname
+        contactname.value = item.Contactname
         adress.value = item.adress
         phone.value = item.phone
         email.value = item.email
