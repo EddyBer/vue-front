@@ -2,11 +2,13 @@
 import { ref, defineComponent } from 'vue';
 import InvoiceForm from '../vues/InvoiceForm.vue';
 import InvoicesListVue from '../vues/InvoicesList.vue';
+import InvoicesConsultVue from '../vues/InvoicesConsult.vue';
 const tab = ref('')
 
 defineComponent({
     InvoiceForm,
     InvoicesListVue,
+    InvoicesConsultVue,
 })
 
 </script>
@@ -20,6 +22,7 @@ defineComponent({
         class=" w-100 flex-shrink-0">
         <v-tab value="list">List</v-tab>
         <v-tab value="create">Create</v-tab>
+        <v-tab value="consult">Consult</v-tab>
       </v-tabs>
   
       <v-card-text class="d-flex w-100 pa-0 flex-grow-1 overflow-auto">
@@ -29,6 +32,9 @@ defineComponent({
           </v-window-item>
           <v-window-item value="create" class="flex-grow-1">
               <InvoiceForm/>
+          </v-window-item>
+          <v-window-item value="consult" class="flex-grow-1">
+            <InvoicesConsultVue/>
           </v-window-item>
         </v-window>
       </v-card-text>

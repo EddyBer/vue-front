@@ -213,7 +213,6 @@ const { clientData } = storeToRefs(listStore)
             <v-card-title>
               <span class="text-h5">Edit client</span>
             </v-card-title>
-
             <v-card-text>
               <v-container>
                 <v-form  @submit.prevent="saveItemConfirm"  ref="clientForm">

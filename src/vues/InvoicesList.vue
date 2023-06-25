@@ -19,7 +19,7 @@ const InvoiceToDelete = ref({})
 const search =ref('')
 const itemsPerPage = 20
 const headers = [
-    { title: 'Project', align:'start', key:'project'},
+    { title: 'Project', align:'start', key:'project.name'},
     { title: 'status', align:'center', key :'status'},
     { title: 'Payment Method', align:'center', key :'paymentMethod'},
     {title : 'actions' , align:'center' , key:'actions'}

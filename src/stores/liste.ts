@@ -2,16 +2,19 @@ import { defineStore } from "pinia";
 import { clientsApi} from '../services/clients.service'
 import { projectsApi} from '../services/projects.service'
 import { InvoicesApi } from '../services/invoices.service'
+import { InvoicesLinesApi } from '../services/invoicesLine.service'
 import { useAuthStore } from "../stores/auth";
 import { Projects } from "../models/projects.model";
 import { Clients } from "../models/clients.model";
 import { Invoices } from "../models/invoices.model";
+import { InvoicesLines } from "../models/invoicesLines.model";
 
 export interface ListState {
     listName: string;
     clientData: Clients[];
     projectData: Projects[];
     invoicesData : Invoices[]
+    invoicesLineData : InvoicesLines[]
 }
 
 export const uselistStore = defineStore('list', {
@@ -19,10 +22,11 @@ export const uselistStore = defineStore('list', {
         listName: '',
         clientData: [],
         projectData:[],
-        invoicesData: []
+        invoicesData: [],
+        invoicesLineData: []
     }),
     actions: {
-        async loadData(list :string) {
+        async loadData(list :string, invoice : number = 0) {
             const authStore = useAuthStore();
             this.listName = list
             switch (list) {
@@ -61,11 +65,18 @@ export const uselistStore = defineStore('list', {
                 } catch (error) {
                     alert(error)
                 }
+                case 'invoiceLine' :
+                    const invoiceLines = await InvoicesLinesApi.getMyInvoicesLine(parseInt(invoice))
+                    if (invoiceLines) {
+                        this.invoicesLineData = invoiceLines
+                    } else {
+                        throw  "Erreur lors de la récupération de vos lignes factures"
+                    }
                 break
             }
         },
-        async updateData(list :string) {
-           await this.loadData(list)
+        async updateData(list :string, invoice : number = 0 ) {
+           await this.loadData(list, invoice)
         }
     },
     persist:true,
