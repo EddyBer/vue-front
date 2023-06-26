@@ -83,7 +83,8 @@ const onSubmit = handleSubmit(async values => {
             paymentMethod: values.paymentMethod,
             paymentDeadline: values.paymentDeadline,
             paymentDate: values.paymentDate ?? null,
-            userId: id
+            userId: id,
+            note:values.note
         })
         listStore.updateData('invoices')
         location.reload()

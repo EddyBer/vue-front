@@ -187,10 +187,8 @@ const { projectData } = storeToRefs(listStore)
         </v-dialog>
 
 
-        <v-dialog
-          v-model="dialogEdit"
-          max-width="500px"
-        >
+    <v-dialog v-model="dialogEdit"
+        max-width="500px">
     <v-card>
             <v-card-title>
               <span class="text-h5">Edit project</span>
