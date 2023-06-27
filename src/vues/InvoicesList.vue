@@ -29,6 +29,7 @@ const search =ref('')
 const itemsPerPage = 20
 const headers = [
     { title: 'Project', align:'start', key:'project.name'},
+    { title: 'Publication date', align:'start', key:'publishingDate'},
     { title: 'status', align:'center', key :'status'},
     { title: 'Payment Method', align:'center', key :'paymentMethod'},
     {title : 'actions' , align:'center' , key:'actions'}
@@ -81,12 +82,18 @@ const editItem = (item) => {
     paymentMethod.value = item.paymentMethod
     if (item.publishingDate) {
         publishingDate.value = formatDate(new Date(item.publishingDate))
+    } else {
+        publishingDate.value = null
     }
     if (item.paymentDeadline) {
         paymentDeadline.value = formatDate(new Date(item.paymentDeadline))
+    } else {
+        paymentDeadline.value = null
     }
     if (item.paymentDate) {
         paymentDate.value = formatDate(new Date(item.paymentDate))
+    } else {
+        paymentDate.value = null
     }
     note.value = item.note
     dialogEdit.value = true
@@ -157,7 +164,7 @@ const paymentMethodList = [
 const saveItemConfirm = handleSubmit(async values => {
     try {
         const id = authStore.userId
-        console.log(values)
+
         const res = await InvoicesApi.update({
             id : editedIndex.value,
             projectId: values.project,
@@ -204,6 +211,9 @@ const { invoicesData } = storeToRefs(listStore)
         class="elevation-1 h-100"
         :search="search"
     >
+    <template v-slot:item.publishingDate="{ item }">
+        <span>{{ formatDate(new Date(item.columns.publishingDate)) }}</span>
+    </template>
     <template v-slot:item.actions="{ item }">
         <v-icon
         size="small"

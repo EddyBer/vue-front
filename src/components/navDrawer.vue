@@ -91,7 +91,7 @@ const props = defineProps({
                 <invoicesHeader/>
             </div>
 
-            <div  v-else-if="template === 'dashboard'"> 
+            <div  v-else-if="template === 'dashboard' " class="w-100 h-100"> 
                 <Dashboard/>
             </div>
             <div class="w-100 h-100"  v-else-if="template === 'projects'">
