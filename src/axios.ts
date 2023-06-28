@@ -4,7 +4,7 @@ import { Router } from './router/index'
 import { useAuthStore } from './stores/auth';
 
 const middlewareAPI = axios.create({
-    baseURL: 'http://136.244.118.252/:3000/',
+    baseURL: 'http://136.244.118.252:3000/',
 })
 
 middlewareAPI.interceptors.request.use(function (config: InternalAxiosRequestConfig) {
