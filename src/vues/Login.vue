@@ -51,7 +51,8 @@ const onSubmit = handleSubmit(async values => {
 
         goToMainPage()
     } catch (error) {
-        alert(error)
+        const messages = error.response.data.message
+        alert(messages)
     }
 });
 
