@@ -1,17 +1,15 @@
 <script setup>
-import { Bar } from 'vue-chartjs'
+import { Bar, Line } from 'vue-chartjs'
 import { defineComponent, onMounted, ref } from 'vue';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale , PointElement, LineElement, } from 'chart.js'
 import { InvoicesApi } from '../services/invoices.service';
 import { useAuthStore } from "../stores/auth";
-import InvoicesConsult from './InvoicesConsult.vue';
-import { all } from 'axios';
 
 defineComponent({
     Bar,
 })
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement)
 const authStore = useAuthStore();
 
 const loaded = ref(false)
@@ -34,17 +32,44 @@ const monstlyPayesSalesRevenueOfTheYear = ref([
      0,0,0,0,0,0,0,0,0,0,0,0,
 ])
 
+const CumulatemonstlyPayesSalesRevenueOfTheYear = ref([
+     0,0,0,0,0,0,0,0,0,0,0,0,
+])
+
 const monstlyPayesSalesRevenueOfLastTheYear = ref([
      0,0,0,0,0,0,0,0,0,0,0,0,
 ])
 
+const CumulatemonstlyPayesSalesRevenueOfLastTheYear = ref([
+     0,0,0,0,0,0,0,0,0,0,0,0,
+])
+
+const lineData = ref({
+     labels : [ 'January','February','March','April','Mai','June','July','August','September','October','November','December',],
+     datasets : [ 
+          {
+          label: 'Last year',
+          backgroundColor: '#206ce6',
+          data: [0,0,0,0,0,0,0,0,0,0,0,0,] },
+          {
+          label: 'Current year',
+          backgroundColor: '#f87979',
+          data: [0,0,0,0,0,0,0,0,0,0,0,0,] },
+          ]
+})
+
+const lineOption = {
+     responsive: true,
+     borderColor: '#333232',
+     borderWidth:5
+}
 
 const chartData = ref({
      labels : [ 'January','February','March','April','Mai','June','July','August','September','October','November','December',],
      datasets : [ 
           {
           label: 'Last year',
-          backgroundColor: '#f87979',
+          backgroundColor: '#206ce6',
           data: [0,0,0,0,0,0,0,0,0,0,0,0,] },
           {
           label: 'Current year',
@@ -102,19 +127,38 @@ onMounted(async()=> {
                     allSalesRevenue.value[year] = sales
                });
           }
-
-          
      })
+
+     for (const month in monstlyPayesSalesRevenueOfLastTheYear.value) {
+          if (month > 0) {
+               CumulatemonstlyPayesSalesRevenueOfLastTheYear.value[month] = monstlyPayesSalesRevenueOfLastTheYear.value[month] + CumulatemonstlyPayesSalesRevenueOfLastTheYear.value[month - 1]
+          } else {
+               CumulatemonstlyPayesSalesRevenueOfLastTheYear.value[month] = monstlyPayesSalesRevenueOfLastTheYear.value[month]
+          }
+     }
+
+     for (const month in monstlyPayesSalesRevenueOfTheYear.value) {
+          if (month > 0) {
+               CumulatemonstlyPayesSalesRevenueOfTheYear.value[month] = monstlyPayesSalesRevenueOfTheYear.value[month] + CumulatemonstlyPayesSalesRevenueOfTheYear.value[month - 1]
+          } else {
+               CumulatemonstlyPayesSalesRevenueOfTheYear.value[month] = monstlyPayesSalesRevenueOfTheYear.value[month]
+          }
+     }
+
      const MyCa = Object.values(allSalesRevenue.value)
-     maxSalesRevenue.value = Math.max(...MyCa)
+     if (Math.max(...MyCa) > 0) {
+          maxSalesRevenue.value = Math.max(...MyCa)
+     } else {
+          maxSalesRevenue.value = 0
+     }
+
+     lineData.value.datasets[1].data = CumulatemonstlyPayesSalesRevenueOfTheYear.value
+     lineData.value.datasets[0].data = CumulatemonstlyPayesSalesRevenueOfLastTheYear.value
+
      chartData.value.datasets[1].data = monstlyPayesSalesRevenueOfTheYear.value
      chartData.value.datasets[0].data = monstlyPayesSalesRevenueOfLastTheYear.value
      loaded.value = true
 })
-
-
-
-
 
 </script>
 
@@ -197,14 +241,21 @@ onMounted(async()=> {
           </v-card>
      </v-row>
 
-     <v-row align="center"  width="100%" class="d-flex pa-2" >
-     <Bar
-          v-if="loaded" 
-          id="my-chart-id"
+     <v-row align="center"  width="100%" class="d-flex pa-2">
+     <div class="text-h2">Sales revenue factured by month</div>
+     <Bar class="w-100"
+          v-if="loaded"
           :options="chartOptions"
-          :data="chartData"
-          />
+          :data="chartData"/>
      </v-row>
-     
+
+     <v-row align="center"  width="100%" class="d-flex pa-2">
+     <div class="text-h2"> Cumullate sales revenue factured by month</div>
+     <Line
+          class="w-100"
+          v-if="loaded"
+          :data="lineData" 
+          :options="lineOption" />
+     </v-row>
      </v-container>
 </template>
